@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kingsley Host Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Welcome, <span id="username"></span></h1>
+    <p class="subtitle">Available Servers</p>
+
+    <div id="serverList" class="server-list">
+      <!-- Servers will be loaded here dynamically -->
+    </div>
+  </div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+document.getElementById("username").innerText = user.username;
+
+async function loadServers() {
+  const res = await fetch("/servers");
+  const servers = await res.json();
+  const container = document.getElementById("serverList");
+  container.innerHTML = '';
+
+  if (servers.length === 0) {
+    container.innerHTML = '<p>No servers available right now.</p>';
+    return;
+  }
+
+  servers.forEach(s => {
+    const card = document.createElement("div");
+    card.classList.add("server-card");
+    card.innerHTML = `
+      <h3>${s.type || "Server"}</h3>
+      <p>RAM: ${s.ram} | CPU: ${s.cpu}</p>
+      <button onclick="claimServer('${user.id}')">Claim Server</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+async function claimServer(userId){
+  const res = await fetch("/claim", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ userId })
+  });
+  const data = await res.json();
+  if (data.error) return alert(data.error);
+
+  alert(`Server claimed!\nPanel: ${data.panelUrl}\nUser: ${data.username}\nPass: ${data.password}`);
+  loadServers();
+}
+
+loadServers();
+</script>
+</body>
+</html>

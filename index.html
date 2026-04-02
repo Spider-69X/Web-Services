@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kingsley Host</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Kingsley Host</h1>
+  <input id="username" placeholder="Enter username">
+  <button onclick="login()">Login</button>
+
+  <script>
+    async function login() {
+      const username = document.getElementById("username").value;
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ username })
+      });
+      const data = await res.json();
+      localStorage.setItem("user", JSON.stringify(data));
+      window.location.href = "/dashboard.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+/* --------------------------
+   General Page Styles
+--------------------------- */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 50px auto;
+  background: #0f172a;
+  color: white;
+}
+
+/* --------------------------
+   Inputs & Buttons
+--------------------------- */
+input, button {
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  background-color: #22c55e;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #16a34a;
+}
+
+/* --------------------------
+   Tables (Admin Dashboard)
+--------------------------- */
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 1000px;
+}
+
+th, td {
+  padding: 12px 15px;
+  border: 1px solid white;
+}
+
+th {
+  background-color: #1e293b;
+}
+
+td {
+  background-color: #0f172a;
+}
+
+tr:hover td {
+  background-color: #1e293b;
+}
+
+/* --------------------------
+   Headings
+--------------------------- */
+h1, h2 {
+  color: #f8fafc;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+/* --------------------------
+   Preformatted text (Dashboard)
+--------------------------- */
+pre {
+  background-color: #1e293b;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+  overflow-x: auto;
+}
+
+/* --------------------------
+   Responsive
+--------------------------- */
+@media (max-width: 600px) {
+  input, button {
+    width: 80%;
+    font-size: 14px;
+  }
+
+  table {
+    width: 100%;
+  }
+}
